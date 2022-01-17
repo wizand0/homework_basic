@@ -29,6 +29,7 @@ for user in users:
 
 # Point 3: Лучшая профессия.
             if friend['job']['salary'] > best_salary:
+                best_salary = friend['job']['salary']
                 best_occupation = friend['job'].copy()
 
 # Point 4: Самый влиятельный пользователь.
