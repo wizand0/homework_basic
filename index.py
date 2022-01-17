@@ -33,22 +33,32 @@ for user in users:
                 best_occupation = friend['job'].copy()
 
 # Point 4: Самый влиятельный пользователь.
-    if 'friends' in user:
-        friends = user['friends']
-        for friend in friends:
-            sum_of_salaries += friend['job']['salary']
-        if sum_of_salaries > vip_sum_of_salaries:
-            vip_sum_of_salaries = sum_of_salaries
-            vip_user = user['name']
+    friends_total_salary = 0
+    friends = user.get('friends', [])
+    for friend in friends:
+        sum_of_salaries += friend['job']['salary']
+    if sum_of_salaries > max_friends_total_salary:
+        vip_sum_of_salaries = sum_of_salaries
+        vip_user = user['name']
+    
+#    if 'friends' in user:
+#        friends = user['friends']
+#        for friend in friends:
+#            sum_of_salaries += friend['job']['salary']
+#        if sum_of_salaries > vip_sum_of_salaries:
+#            vip_sum_of_salaries = sum_of_salaries
+#            vip_user = user['name']
 
 # Point 5: Путешественники.
             if 'flights' in friend and 'cars' in friend:
                 count_friends_with_cars += 1
+                print(len(friend['flights']))
                 count_flights_by_friends_with_cars += len(friend['flights'])
             try:
                 avg_flights = round(count_flights_by_friends_with_cars/count_friends_with_cars, 5)
             except ZeroDivisionError:
-                avg_flights = 0
+                print('У кого то есть ключ flights но он пустой')
+            
 
 # Point 6: Чистка списка
             
