@@ -33,7 +33,6 @@ for user in users:
                 best_occupation = friend['job'].copy()
 
 # Point 4: Самый влиятельный пользователь.
-    friends_total_salary = 0
     friends = user.get('friends', [])
     for friend in friends:
         sum_of_salaries += friend['job']['salary']
@@ -49,7 +48,17 @@ for user in users:
 #            vip_sum_of_salaries = sum_of_salaries
 #            vip_user = user['name']
 
-# # Point 5: Путешественники.
+# Point 5: Путешественники.
+    friends = user.get('friends', [])
+    for friend in friends:
+        cars = friend.get('cars', None)
+        if cars:
+            count_friends_with_cars += 1
+            count_flights_by_friends_with_cars += len(friend.get('flights', []))
+        avg_flights = round(count_flights_by_friends_with_cars / count_friends_with_cars,
+            5) if count_friends_with_cars else 0
+
+
 #             if 'flights' in friend and 'cars' in friend:
 #                 count_friends_with_cars += 1
 #                 print(len(friend['flights']))
