@@ -55,19 +55,10 @@ for user in users:
         if cars:
             count_friends_with_cars += 1
             count_flights_by_friends_with_cars += len(friend.get('flights', []))
-        avg_flights = round(count_flights_by_friends_with_cars / count_friends_with_cars,
-            5) if count_friends_with_cars else 0
-
-
-#             if 'flights' in friend and 'cars' in friend:
-#                 count_friends_with_cars += 1
-#                 print(len(friend['flights']))
-#                 count_flights_by_friends_with_cars += len(friend['flights'])
-#             try:
-#                 avg_flights = round(count_flights_by_friends_with_cars/count_friends_with_cars, 5)
-#             except ZeroDivisionError:
-#                 print('У кого то есть ключ flights но он пустой')
-            
+        try:
+            avg_flights = round(count_flights_by_friends_with_cars / count_friends_with_cars, 5)
+        except ZeroDivisionError:
+            avg_flights = 0
 
 # # Point 6: Чистка списка
             
