@@ -33,10 +33,13 @@ for user in users:
                 best_occupation = friend['job'].copy()
 
 # Point 4: Самый влиятельный пользователь.
+    if 'friends' in user:
+        friends = user['friends']
+        for friend in friends:
             sum_of_salaries += friend['job']['salary']
-            if sum_of_salaries > vip_sum_of_salaries:
-                vip_sum_of_salaries = sum_of_salaries
-                vip_user = user['name']
+        if sum_of_salaries > vip_sum_of_salaries:
+            vip_sum_of_salaries = sum_of_salaries
+            vip_user = user['name']
 
 # Point 5: Путешественники.
             if 'flights' in friend and 'cars' in friend:
@@ -59,4 +62,3 @@ to_delete_list = list(set(to_delete_list))
 for user in users:
     if user['name'] in to_delete_list:
         users.remove(user)
-
