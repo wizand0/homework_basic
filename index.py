@@ -33,6 +33,7 @@ for user in users:
                 best_occupation = friend['job'].copy()
 
 # Point 4: Самый влиятельный пользователь.
+    sum_of_salaries = 0
     friends = user.get('friends', [])
     for friend in friends:
         sum_of_salaries += friend['job']['salary']
