@@ -15,9 +15,9 @@ to_delete_list = []
 
 for user in users:
 # Point 1: Определение плохих паролей.
-    bad_passwords = user['password']
-    if bad_passwords.isdigit():
-        dict1 = {user['name']: user['mail']}
+# Проверка, что пароль состоит только из цифр
+    if user['password'].isdigit():
+        dict1 = {'name': user['name'], 'mail': user['mail']}
         users_wrong_password.append(dict1)
 
 # Point 2: Определение водителей-девушек.
@@ -45,6 +45,7 @@ for user in users:
                 avg_flights = round(count_flights_by_friends_with_cars/count_friends_with_cars, 5)
             except ZeroDivisionError:
                 avg_flights = 0
+                print(avg_flights)
 
 # Point 6: Чистка списка
             
@@ -58,3 +59,5 @@ to_delete_list = list(set(to_delete_list))
 for user in users:
     if user['name'] in to_delete_list:
         users.remove(user)
+
+print(users_wrong_password)
