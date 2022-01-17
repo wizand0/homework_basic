@@ -59,6 +59,7 @@ for user in users:
 
 to_delete_list = list(set(to_delete_list))
 
+
 for user in users:
     if user['name'] in to_delete_list:
         users.remove(user)
