@@ -40,14 +40,6 @@ for user in users:
     if sum_of_salaries > vip_sum_of_salaries:
         vip_sum_of_salaries = sum_of_salaries
         vip_user = user['name']
-    
-#    if 'friends' in user:
-#        friends = user['friends']
-#        for friend in friends:
-#            sum_of_salaries += friend['job']['salary']
-#        if sum_of_salaries > vip_sum_of_salaries:
-#            vip_sum_of_salaries = sum_of_salaries
-#            vip_user = user['name']
 
 # Point 5: Путешественники.
     friends = user.get('friends', [])
@@ -61,16 +53,17 @@ for user in users:
         except ZeroDivisionError:
             avg_flights = 0
 
-# # Point 6: Чистка списка
-            
-#             if 'flights' in friend:
-#                 for country in friend['flights']:
-#                     if country['country'] in countries:
-#                         to_delete_list.append(user['name'])
+# Point 6: Чистка списка
+            friends = user.get('friends', [])
+            for friend in friends:
+                flights = friend.get('flights', None)
+                for flight in flights:
+                    if flight['country'] in countries:
+                        to_delete_list.append(user['name'])
 
-# to_delete_list = list(set(to_delete_list))
+to_delete_list = list(set(to_delete_list))
 
 
-# for user in users:
-#     if user['name'] in to_delete_list:
-#         users.remove(user)
+for user in users:
+    if user['name'] in to_delete_list:
+        users.remove(user)
