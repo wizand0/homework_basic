@@ -45,7 +45,6 @@ for user in users:
                 avg_flights = round(count_flights_by_friends_with_cars/count_friends_with_cars, 5)
             except ZeroDivisionError:
                 avg_flights = 0
-                print(avg_flights)
 
 # Point 6: Чистка списка
             
@@ -60,4 +59,3 @@ for user in users:
     if user['name'] in to_delete_list:
         users.remove(user)
 
-print(users_wrong_password)
