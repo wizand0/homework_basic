@@ -33,6 +33,7 @@ for user in users:
             best_occupation = friend['job'].copy()
 
 # Point 4: Самый влиятельный пользователь.
+    #Обнуление суммы зарплат друзей предыдущего юзера
     sum_of_salaries = 0
     friends = user.get('friends', [])
     for friend in friends:
@@ -49,38 +50,28 @@ for user in users:
             count_friends_with_cars += 1
             count_flights_by_friends_with_cars += len(friend.get('flights', []))
         try:
+            # avg_flights может быть 0
             avg_flights = round(count_flights_by_friends_with_cars / count_friends_with_cars, 5)
         except ZeroDivisionError:
             avg_flights = 0
 
 # Point 6: Чистка списка
-#             friends = user.get('friends', [])
-#             for friend in friends:
-#                 flights = friend.get('flights', None)
-#                 for flight in flights:
-#                     if flight['country'] in countries:
-#                         to_delete_list.append(user['name'])
-
-# to_delete_list = list(set(to_delete_list))
-# for user in users:
-#     if user['name'] in to_delete_list:
-#         users.remove(user)
 i = 0
 while i < len(users):
-    need_remove = False
+    # Флаг на необходимость удаления
+    to_delete = False
     friends = users[i].get('friends', [])
     for friend in friends:
         flights = friend.get('flights', [])
         for flight in flights:
             if flight['country'] in countries:
-                need_remove = True
+                # Если страна полета в списке стран, то выход из всех циклов
+                to_delete = True
                 break
-        if need_remove:
+        if to_delete:
             break
     
-    if need_remove:
+    if to_delete:
         del users[i]
     else:
         i += 1
-    
-#        expected = users_copy[:]
