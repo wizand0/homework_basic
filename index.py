@@ -54,14 +54,33 @@ for user in users:
             avg_flights = 0
 
 # Point 6: Чистка списка
-            friends = user.get('friends', [])
-            for friend in friends:
-                flights = friend.get('flights', None)
-                for flight in flights:
-                    if flight['country'] in countries:
-                        to_delete_list.append(user['name'])
+#             friends = user.get('friends', [])
+#             for friend in friends:
+#                 flights = friend.get('flights', None)
+#                 for flight in flights:
+#                     if flight['country'] in countries:
+#                         to_delete_list.append(user['name'])
 
-to_delete_list = list(set(to_delete_list))
-for user in users:
-    if user['name'] in to_delete_list:
-        users.remove(user)
+# to_delete_list = list(set(to_delete_list))
+# for user in users:
+#     if user['name'] in to_delete_list:
+#         users.remove(user)
+i = 0
+while i < len(users):
+    need_remove = False
+    friends = users[i].get('friends', [])
+    for friend in friends:
+        flights = friend.get('flights', [])
+        for flight in flights:
+            if flight['country'] in countries:
+                need_remove = True
+                break
+        if need_remove:
+            break
+    
+    if need_remove:
+        del users[i]
+    else:
+        i += 1
+    
+#        expected = users_copy[:]
