@@ -21,16 +21,16 @@ for user in users:
         users_wrong_password.append(dict1)
 
 # Point 2: Определение водителей-девушек.
-    if 'friends' in user:
-        friends = user['friends']
-        for friend in friends:
-            if 'cars' in friend and friend['sex'].upper() == 'F':
-                girls_drivers.append(friend['name'])
+    friends = user.get('friends', [])
+#        friends = user['friends']
+    for friend in friends:
+        if 'cars' in friend and friend['sex'].upper() == 'F':
+            girls_drivers.append(friend['name'])
 
 # Point 3: Лучшая профессия.
-            if friend['job']['salary'] > best_salary:
-                best_salary = friend['job']['salary']
-                best_occupation = friend['job'].copy()
+        if friend['job']['salary'] > best_salary:
+            best_salary = friend['job']['salary']
+            best_occupation = friend['job'].copy()
 
 # Point 4: Самый влиятельный пользователь.
     sum_of_salaries = 0
