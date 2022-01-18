@@ -21,11 +21,11 @@ for user in users:
         users_wrong_password.append(dict1)
 
 # Point 2: Определение водителей-девушек.
-    friends = user.get('friends', [])
-    for friend in friends:
-        cars = friend.get('cars', None)
-        if cars and friend['sex'].upper() == 'F':
-            girls_drivers.append(friend['name'])
+    if 'friends' in user:
+        friends = user['friends']
+        for friend in friends:
+            if 'cars' in friend and friend['sex'].upper() == 'F':
+                girls_drivers.append(friend['name'])
 
 # Point 3: Лучшая профессия.
             if friend['job']['salary'] > best_salary:
