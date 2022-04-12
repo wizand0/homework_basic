@@ -1,4 +1,3 @@
-
 def fizz_buzz(a, b):
     tmp = 0
     for i in range(a, b + 1):
@@ -10,14 +9,32 @@ def fizz_buzz(a, b):
 
 def plural_form(number, form1, form2, form3):
     n = abs(number)
-    n %= 100
-    if n >= 5 & n <= 20:
-        return form3
-    n %= 10
-    if n == 1:
+    if n % 10 == 1 and n % 100 != 11:
         return form1
-    if n >= 2 & n <= 4:
+    elif 2 <= n % 10 <= 4 and (n % 100 < 10 or n % 100 >= 20):
         return form2
-
     else:
         return form3
+
+
+def html(*args, **kwargs):
+    def decorator(decorated_function):
+        def wrapper(argument):
+
+            result_url = decorated_function(argument)
+            position_arg = ''
+            for i in args:
+                position_arg += f'{i}'
+
+            temp_str = ''
+
+            if kwargs:
+                for k, v in kwargs.items():
+                    temp_str += f' {k}="{v}"'
+
+            result_url = f'<{position_arg}{temp_str}>{result_url}</{position_arg}>'
+            return result_url
+
+        return wrapper
+
+    return decorator
